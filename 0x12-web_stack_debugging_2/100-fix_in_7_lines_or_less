@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sed -i 's/user nginx;/user nginx;\ndaemon off;/' /etc/nginx/nginx.conf
+sed -i 's/listen\s80\s;/listen 8080;/' /etc/nginx/sites-available/default
+sed -i '/listen\s*
+:
+:
+:::80\s*default_server/ s/^/#/' /etc/nginx/sites-available/default
+chown -R nginx:nginx /var/lib/nginx
+service nginx start
